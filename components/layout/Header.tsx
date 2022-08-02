@@ -1,4 +1,4 @@
-import { CButton } from '@coreui/react';
+import { CButton, CCloseButton, CCol, CRow } from '@coreui/react';
 import { CCollapse } from '@coreui/react';
 import { CDropdown } from '@coreui/react';
 import { CDropdownItem } from '@coreui/react';
@@ -11,18 +11,22 @@ import { CHeaderNav } from '@coreui/react';
 import { CNavItem } from '@coreui/react';
 import { CNavLink } from '@coreui/react';
 import React, {useState} from 'react';
-import {CDropdownDivider, CDropdownToggle, CHeaderBrand, CHeaderToggler} from '@coreui/react'
+import {CDropdownDivider, CDropdownToggle, CHeaderBrand} from '@coreui/react'
 
 const Header = () => {
   const [visible, setVisible] = useState(false)
 
   return (
-    <CHeader>
-
+    <CHeader style={{minHeight:'auto'}} className='header'>
       <CContainer fluid>
-        <CHeaderBrand>Bibi Big</CHeaderBrand>
-        <CHeaderToggler onClick={() => setVisible(!visible)} />
-        <CCollapse className="header-collapse" visible={visible}>
+        <CHeaderBrand>Bibibig</CHeaderBrand>
+        <CButton type="button" color={ visible ? 'danger' :'success'} onClick={() => setVisible(!visible)}>
+          {visible ? 'Close Menu' : 'Open Menu'}
+        </CButton>
+      </CContainer>
+      <div className='menuBox'>
+        <div className='menu'>
+          <CCollapse className="header-collapse" visible={visible}>
           <CHeaderNav>
             <CNavItem>
               <CNavLink href="/" active>
@@ -33,7 +37,7 @@ const Header = () => {
               <CNavLink href="/">Link</CNavLink>
             </CNavItem>
             <CDropdown variant="nav-item">
-              <CDropdownToggle color="secondary">Dropdown button</CDropdownToggle>
+              <CDropdownToggle color="secondary">Menu</CDropdownToggle>
               <CDropdownMenu>
                 <CDropdownItem href="#">Action</CDropdownItem>
                 <CDropdownItem href="#">Another action</CDropdownItem>
@@ -41,11 +45,6 @@ const Header = () => {
                 <CDropdownItem href="#">Something else here</CDropdownItem>
               </CDropdownMenu>
             </CDropdown>
-            <CNavItem>
-              <CNavLink href="#" disabled>
-                Disabled
-              </CNavLink>
-            </CNavItem>
           </CHeaderNav>
           <CForm className="d-flex">
             <CFormInput className="me-2" type="search" placeholder="Search" />
@@ -54,7 +53,8 @@ const Header = () => {
             </CButton>
           </CForm>
         </CCollapse>
-      </CContainer>
+        </div>
+      </div>
     </CHeader>
   );
 };
