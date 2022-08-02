@@ -1,6 +1,7 @@
 import React, {ReactNode} from 'react';
 import Header from './Header'
 import Footer from './Footer'
+import Layout from './Layout'
 
 type Children = {
   children : ReactNode | ReactNode[]
@@ -8,13 +9,13 @@ type Children = {
 
 const Main = ({children} : Children) => {
   return (
-    <div>
+    <Layout>
       <Header />
       <main>
         {children}
       </main>
-      <Footer/>
-    </div>
+      <Footer />
+    </Layout>
   );
 };
 
