@@ -1,7 +1,5 @@
 import {
   CButton,
-  CCloseButton,
-  CCol,
   CFormSwitch,
   CModal,
   CModalBody, CModalFooter,
@@ -20,9 +18,8 @@ import { CHeader } from '@coreui/react';
 import { CHeaderNav } from '@coreui/react';
 import { CNavItem } from '@coreui/react';
 import { CNavLink } from '@coreui/react';
-import React, {ReactNode, useState} from 'react';
+import React, {useState} from 'react';
 import {CDropdownDivider, CDropdownToggle, CHeaderBrand} from '@coreui/react'
-import Modal from '../modal/Modal'
 
 const Header = () => {
   const [visible, setVisible] = useState(false)

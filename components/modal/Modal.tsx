@@ -9,7 +9,7 @@ type Children = {
 const Modal = ({children,props} : Children) => {
 
   return (
-
+    <div></div>
   );
 };
 

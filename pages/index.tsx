@@ -1,11 +1,12 @@
 import type { NextPage } from 'next'
+import {CContainer} from '@coreui/react'
 
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <CContainer fluid>
       asd
-    </div>
+    </CContainer>
   )
 }
 
