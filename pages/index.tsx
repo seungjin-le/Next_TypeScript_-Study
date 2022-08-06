@@ -1,12 +1,12 @@
 import type { NextPage } from 'next'
 import {CContainer} from '@coreui/react'
-
+import { Map, MapMarker } from "react-kakao-maps-sdk"
 
 const Home: NextPage = () => {
   return (
-    <CContainer fluid>
-      asd
-    </CContainer>
+   <CContainer>
+     test
+   </CContainer>
   )
 }
 
