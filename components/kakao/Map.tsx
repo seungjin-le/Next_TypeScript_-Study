@@ -1,10 +1,9 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Map, MapMarker } from "react-kakao-maps-sdk"
-
+/*global kakao*/
 
 
 const Maps = () => {
-
 
   return (
     <Map

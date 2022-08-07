@@ -5,7 +5,7 @@ const KakaoMap = (props : object) => {
 
   return (
     <div>
-    <Maps />
+      <Maps />
     </div>
   );
 };
