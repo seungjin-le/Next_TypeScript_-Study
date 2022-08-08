@@ -29,7 +29,7 @@ const Header = () => {
     setDarkMode(!darkMode)
   }
   return (
-    <CHeader style={{minHeight:'auto'}} className='header'>
+    <CHeader className='header mb-2'>
       <CContainer fluid>
         <CHeaderBrand>Bibibig</CHeaderBrand>
           <CButton type="button" color={ visible ? 'danger' :'success'} onClick={() => setVisible(!visible)}>
