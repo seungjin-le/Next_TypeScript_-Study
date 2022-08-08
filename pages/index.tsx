@@ -4,7 +4,7 @@ import {CContainer} from '@coreui/react'
 const Home: NextPage = () => {
   return (
    <CContainer>
-     test
+     <h1>Home</h1>
    </CContainer>
   )
 }

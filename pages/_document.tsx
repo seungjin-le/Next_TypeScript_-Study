@@ -12,7 +12,7 @@ const Document = () => {
         <NextScript />
         <script
           type='text/javascript'
-          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env['NEXT_PUBLIC_KAKAO_MAP_API']}&libraries=services,clusterer?autoload=false`}
+          src={`//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env['KAKAO_MAP_API']}&libraries=services,clusterer?autoload=false`}
           strategy="beforeInteractive"
         />
       </body>
