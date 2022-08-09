@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import Book from '../../components/kakao/Book'
 import axios from 'axios'
+import {CCol, CContainer, CRow} from '@coreui/react'
 
 
 type Props = {
@@ -17,15 +18,20 @@ const KakaoBook = ({props} : Props) => {
   }, [props]);
 
   return (
-    <div>
+    <CContainer className='overflow-hidden'>
+      <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 4 }} className='g-4'>
       {data &&
         data.map((value : object, index : number) => (
-          <Book value={value} index={index} key={index}/>
+          <CCol xs className=''>
+            <Book props={value} index={index} key={index}/>
+          </CCol>
         ))
       }
-    </div>
+      </CRow>
+    </CContainer>
   );
 };
+
 export async function getServerSideProps() {
 
   const data = await axios.get("https://dapi.kakao.com/v3/search/book?target=title", {
