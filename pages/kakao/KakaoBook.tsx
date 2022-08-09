@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import Book from '../../components/kakao/Book'
 import axios from 'axios'
 import {CCol, CContainer, CRow} from '@coreui/react'
+import SearchTextInput from '../../components/imput/SearchTextInput'
 
 
 type Props = {
@@ -10,16 +11,49 @@ type Props = {
 
 const KakaoBook = ({props} : Props) => {
   const [data, setData] : any[]= useState();
-
+  const [searchDate, setSearchDate] : string = useState('');
   useEffect(() => {
     if(props){
       setData(Object.keys(props).map(item => props[item]))
     }
   }, [props]);
 
+  const searchBookOnChange = (e : any) => {
+    setSearchDate(e.target.value)
+  }
+
+  const searchBookOnClick = () => {
+    axios.get("https://dapi.kakao.com/v3/search/book?target=title", {
+      params: {
+        query: searchDate
+      },
+      headers: {
+        "Authorization": `KakaoAK ${process.env['KAKAO_BOOK_API']}`
+      },
+    })
+      .then(res => {
+        console.log(res)
+        setData(Object.keys(res.data.documents).map(item => res.data.documents[item]))
+      })
+      .catch(err => console.log(err))
+  }
+
   return (
-    <CContainer className='overflow-hidden'>
-      <CRow xs={{ cols: 1, gutter: 4 }} md={{ cols: 4 }} className='g-4'>
+    <CContainer className='p-0'>
+      <SearchTextInput
+        placeHolder='Book Search'
+        size='4'
+        onChange={searchBookOnChange}
+        onClick={searchBookOnClick}
+      />
+      <CRow
+        xs={{ cols: 1 }}
+        sm={{ cols:2 }}
+        md={{ cols: 3 }}
+        lg={{ cols: 4 }}
+        xl={{ cols: 5 }}
+        xxl={{ cols: 6 }}
+        className='g-4'>
       {data &&
         data.map((value : object, index : number) => (
           <CCol xs className=''>

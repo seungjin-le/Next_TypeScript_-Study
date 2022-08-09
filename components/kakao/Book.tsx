@@ -1,5 +1,5 @@
-import React from 'react';
-import {CButton, CCard, CCardBody, CCardImage, CCardText, CCardTitle} from '@coreui/react'
+import React, {useState} from 'react';
+import {CButton, CCard, CCardBody, CCardImage, CCardText, CCardTitle, CListGroup, CListGroupItem} from '@coreui/react'
 
 type Props = {
   props?:object
@@ -37,20 +37,28 @@ const Books = ({props} : ValueObj ) => {
   //         "박재현"
   //     ],
   //     "url": "https://search.daum.net/search?w=bookpage&bookId=635470&q=%EC%95%84%EB%93%A4%EB%9F%AC+%EC%8B%AC%EB%A6%AC%ED%95%99%EC%9D%84+%EC%9D%BD%EB%8A%94+%EB%B0%A4"
+  let bookData : string = ''
+  if(props?.datetime){
+    let data = new Date(props.datetime)
+    let year : number = data.getFullYear()
+    let mon : number= data.getMonth()
+    let day : number= data.getDay()
+    bookData = `${year}년 ${mon+1}월 ${day}일`;
 
-  console.log(props)
-  //const {price} = value
-  //{
+  }
 
   return (
-    <CCard className='mb-2 h-100' >
-      <CCardImage className='p-1' orientation="top" src={props?.thumbnail} />
-      <CCardBody>
-        <CCardTitle>{props?.title}</CCardTitle>
-        <CCardText>
-            {props?.contents}
-        </CCardText>
-        <CButton href="#">Go somewhere</CButton>
+    <CCard className='mb-2 h-100' style={{color:'black', maxHeight:'40rem'}}>
+      <CCardImage className='p-1' orientation="top" src={props?.thumbnail} width={200} height={300}/>
+      <CCardBody className='p-1'>
+        <CCardTitle className='.titleBox'>{props?.title}</CCardTitle>
+        <CListGroup flush>
+          <CListGroupItem>출판사 : {props?.publisher}</CListGroupItem>
+          <CListGroupItem>정상가 : {props?.price}</CListGroupItem>
+          <CListGroupItem>판매가 : {props?.sale_price}</CListGroupItem>
+          <CListGroupItem>출간일 : {bookData}</CListGroupItem>
+        </CListGroup>
+        <CButton>자세히 보기</CButton>
       </CCardBody>
     </CCard>
   );
