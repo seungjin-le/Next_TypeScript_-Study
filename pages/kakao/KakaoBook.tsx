@@ -3,6 +3,7 @@ import Book from '../../components/kakao/Book'
 import axios from 'axios'
 import {CCol, CContainer, CRow} from '@coreui/react'
 import SearchTextInput from '../../components/imput/SearchTextInput'
+import {get} from '../../core/api/axios'
 
 
 type Props = {
@@ -10,11 +11,13 @@ type Props = {
 }
 
 const KakaoBook = ({props} : Props) => {
+  console.log(props)
   const [data, setData] : any[]= useState();
-  const [searchDate, setSearchDate] : string = useState('');
+  const [searchDate, setSearchDate] : any = useState('');
+
   useEffect(() => {
     if(props){
-      setData(Object.keys(props).map(item => props[item]))
+      setData(props)
     }
   }, [props]);
 
@@ -22,20 +25,14 @@ const KakaoBook = ({props} : Props) => {
     setSearchDate(e.target.value)
   }
 
-  const searchBookOnClick = () => {
-    axios.get("https://dapi.kakao.com/v3/search/book?target=title", {
-      params: {
-        query: searchDate
-      },
-      headers: {
-        "Authorization": `KakaoAK ${process.env['KAKAO_BOOK_API']}`
-      },
-    })
-      .then(res => {
-        console.log(res)
-        setData(Object.keys(res.data.documents).map(item => res.data.documents[item]))
+  const searchBookOnClick = async () => {
+    get(searchDate)
+      .then((res) => {
+        if(res.status === 200){
+          setData(res.data.documents)
+        }
       })
-      .catch(err => console.log(err))
+      .catch((err) => console.log(err))
   }
 
   return (
@@ -45,6 +42,7 @@ const KakaoBook = ({props} : Props) => {
         size='4'
         onChange={searchBookOnChange}
         onClick={searchBookOnClick}
+        value={searchDate}
       />
       <CRow
         xs={{ cols: 1 }}
@@ -56,7 +54,7 @@ const KakaoBook = ({props} : Props) => {
         className='g-4'>
       {data &&
         data.map((value : object, index : number) => (
-          <CCol xs className=''>
+          <CCol xs className='' key={index}>
             <Book props={value} index={index} key={index}/>
           </CCol>
         ))
@@ -67,11 +65,10 @@ const KakaoBook = ({props} : Props) => {
 };
 
 export async function getServerSideProps() {
-
   const data = await axios.get("https://dapi.kakao.com/v3/search/book?target=title", {
     params: {
       // 검색어
-      query: '미움받을 용기'
+      query: '어둠의 실력자'
       // 필수아닌 검색 조건들
       //결과 문서 정렬 방식
       //sort	String	, accuracy(정확도순) 또는 latest(발간일순), 기본값 accuracy
@@ -88,7 +85,7 @@ export async function getServerSideProps() {
   })
     .then(res => {
       return {
-        props: {...res.data.documents},
+        props: [...res.data.documents],
       };
     })
     .catch(err => console.log(err))
