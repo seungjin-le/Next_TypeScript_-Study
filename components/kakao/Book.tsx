@@ -31,10 +31,6 @@ const Books = ({props, onClick} : ValueObj ) => {
     bookData = `${year}년 ${mon+1}월 ${day}일`;
   }
 
-  // overflow:hidden;
-  //       text-overflow:ellipsis;
-  //       white-space:nowrap;
-
   return (
     <CCard className='mb-2 h-100' style={{color:'black', maxHeight:'40rem'}}>
       <CCardImage className='p-1' orientation="top" src={thumbnail || "http://geojecci.korcham.net/images/no-image01.gif"} width={200} height={300}/>
