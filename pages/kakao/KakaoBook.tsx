@@ -37,7 +37,9 @@ const KakaoBook = ({props} : Props) => {
   const searchBookOnChange = (e : any) => {
     setSearchDate(e.target.value)
   }
-
+  const searchBookOnKeyDown = (e : any) => {
+    if(e.key === 'Enter') return searchBookOnClick()
+  }
   const searchBookOnClick = async () => {
     get(searchDate)
       .then((res) => {
@@ -49,7 +51,6 @@ const KakaoBook = ({props} : Props) => {
   }
 
   const bookItemOnClick = (e : any, value : any) => {
-    console.log(value)
     let bookDate
     if(value?.datetime){
       let data = new Date(value?.datetime)
@@ -57,13 +58,12 @@ const KakaoBook = ({props} : Props) => {
       let mon : number= data.getMonth()
       let day : number= data.getDay()
       bookDate = `${year}년 ${mon+1}월 ${day}일`;
-      console.log(bookDate)
     }
     setModalData({
       ...value,
       datetime : bookDate
     })
-    setShowModal(true)
+    setShowModal(!showModal)
   }
 
   useEffect(() => {
@@ -78,6 +78,7 @@ const KakaoBook = ({props} : Props) => {
         size='4'
         onChange={searchBookOnChange}
         onClick={searchBookOnClick}
+        onKeyPress={searchBookOnKeyDown}
         value={searchDate}
       />
       <CRow
@@ -99,15 +100,15 @@ const KakaoBook = ({props} : Props) => {
     </CContainer>
       <CModal
         size="lg"
+        onClick={() => setShowModal(!showModal)}
         visible={showModal}
-        onClick={() => setShowModal(false)}
       >
         <CModalHeader>
           <CModalTitle style={{color: 'black'}}>{modalData?.title}</CModalTitle>
         </CModalHeader>
         <CModalBody style={{color: 'black'}}>
           <CCol>
-            <CImage className='m3' align="start" fluid src={modalData?.thumbnail}  width={200} height={200}/>
+            <CImage className='m3' align="start" fluid rounded src={modalData?.thumbnail || 'http://geojecci.korcham.net/images/no-image01.gif'}  width={200} height={200}/>
             <div>
               <CListGroup flush>
                 <CListGroupItem>저자 : {modalData?.authors}</CListGroupItem>
@@ -123,7 +124,7 @@ const KakaoBook = ({props} : Props) => {
           {modalData?.contents}
         </CModalBody>
         <CModalFooter>
-          <CButton color="secondary" onClick={() => setShowModal(false)}>Close</CButton>
+          <CButton color="secondary" onClick={() => setShowModal(!showModal)}>Close</CButton>
           <CButton color="primary" href={modalData?.url}>자세히 보기</CButton>
         </CModalFooter>
       </CModal>

@@ -31,18 +31,25 @@ const Books = ({props, onClick} : ValueObj ) => {
     bookData = `${year}년 ${mon+1}월 ${day}일`;
   }
 
+  // overflow:hidden;
+  //       text-overflow:ellipsis;
+  //       white-space:nowrap;
+
   return (
-    <CCard className='mb-2 h-100' style={{color:'black', maxHeight:'40rem'}} onClick={(e) => onClick(e,props)}>
-      <CCardImage className='p-1' orientation="top" src={thumbnail} width={200} height={300}/>
+    <CCard className='mb-2 h-100' style={{color:'black', maxHeight:'40rem'}}>
+      <CCardImage className='p-1' orientation="top" src={thumbnail || "http://geojecci.korcham.net/images/no-image01.gif"} width={200} height={300}/>
       <CCardBody className='p-1'>
-        <CCardTitle className='.titleBox'>{title}</CCardTitle>
+        <CCardTitle
+          className='overflow-hidden'
+          style={{maxHeight:'40px',minHeight:'40px', textOverflow:'ellipsis', whiteSpace:'nowrap'}}
+        >{title}</CCardTitle>
         <CListGroup flush>
           <CListGroupItem>출판사 : {publisher}</CListGroupItem>
           <CListGroupItem>정상가 : {price}</CListGroupItem>
           <CListGroupItem>판매가 : {sale_price}</CListGroupItem>
           <CListGroupItem>출간일 : {bookData}</CListGroupItem>
         </CListGroup>
-        <CButton>자세히 보기</CButton>
+        <CButton onClick={(e) => onClick(e,props)}>자세히 보기</CButton>
       </CCardBody>
     </CCard>
   );

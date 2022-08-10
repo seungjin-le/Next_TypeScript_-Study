@@ -1,5 +1,5 @@
 import React from 'react';
-import {CButton, CCol, CForm, CFormInput, CFormLabel, CRow} from '@coreui/react'
+import {CButton, CCol, CForm, CFormInput, CFormLabel} from '@coreui/react'
 
 type InputAtt = {
   id? : string
@@ -9,17 +9,19 @@ type InputAtt = {
   label?:string
   onChange?: any
   onClick?: any
+  onKeyPress?: any
 }
 
 const SearchTextInput = (props : InputAtt) => {
-  const {id, value, placeHolder,size, label, onChange, onClick} = props;
+  const {id, value, placeHolder,size, label, onChange, onClick,onKeyPress} = props;
   return (
       <CForm className="row g-3 justify-content-end">
         <CCol xs={size}>
-          <CFormLabel htmlFor="inputPassword2" className="visually-hidden">
+          <CFormLabel className="visually-hidden">
             {label}
           </CFormLabel>
-          <CFormInput type="text" id={id} placeholder={placeHolder} value={value} onChange={onChange}/>
+          <CFormInput type="text" className='visually-hidden'/>
+          <CFormInput type="text" id={id} placeholder={placeHolder} value={value} onChange={onChange} onKeyPress={onKeyPress}/>
         </CCol>
         <CCol xs="auto">
           <CButton type="button" className="mb-3" onClick={onClick}>
