@@ -15,7 +15,6 @@ import {
 } from '@coreui/react'
 import SearchTextInput from '../../components/imput/SearchTextInput'
 import {get} from '../../core/api/axios'
-import modal from '../../components/modal/Modal'
 
 
 type Props = {
@@ -41,7 +40,16 @@ const KakaoBook = ({props} : Props) => {
     if(e.key === 'Enter') return searchBookOnClick()
   }
   const searchBookOnClick = async () => {
-    get(searchDate)
+    const url : string = 'https://dapi.kakao.com/v3/search/book?target=title';
+    const searchData : object | any = {
+      url,
+      params:{
+        query:searchDate,
+        page:50,
+        size:50
+      },
+    }
+    get(searchData)
       .then((res) => {
         if(res.status === 200){
           setData(res.data.documents)
@@ -125,7 +133,7 @@ const KakaoBook = ({props} : Props) => {
         </CModalBody>
         <CModalFooter>
           <CButton color="secondary" onClick={() => setShowModal(!showModal)}>Close</CButton>
-          <CButton color="primary" href={modalData?.url}>자세히 보기</CButton>
+          <CButton color="primary" href={modalData?.url}>read more</CButton>
         </CModalFooter>
       </CModal>
     </>
@@ -136,7 +144,7 @@ export async function getServerSideProps() {
   const data = await axios.get("https://dapi.kakao.com/v3/search/book?target=title", {
     params: {
       // 검색어
-      query: '어둠의 실력자'
+      query: '아프니까'
       // 필수아닌 검색 조건들
       //결과 문서 정렬 방식
       //sort	String	, accuracy(정확도순) 또는 latest(발간일순), 기본값 accuracy

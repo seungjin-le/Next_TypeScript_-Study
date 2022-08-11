@@ -3,7 +3,7 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    <CFooter className='mt-2'>
+    <CFooter className='mt-2 flex-grow-0'>
       <div>
         <span><b>Bibiblg</b> {" "}</span>
         <span>&copy; <b>2022 Next.js + TypeScript Project</b></span>

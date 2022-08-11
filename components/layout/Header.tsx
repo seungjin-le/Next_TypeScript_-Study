@@ -29,7 +29,7 @@ const Header = () => {
     setDarkMode(!darkMode)
   }
   return (
-    <CHeader className='header mb-2'>
+    <CHeader className='header mb-2 flex-grow-0'>
       <CContainer fluid>
         <CHeaderBrand>Bibibig</CHeaderBrand>
           <CButton type="button" color={ visible ? 'danger' :'success'} onClick={() => setVisible(!visible)}>
@@ -46,7 +46,7 @@ const Header = () => {
               </CNavLink>
             </CNavItem>
             <CNavItem>
-              <CNavLink href="/">Link</CNavLink>
+              <CNavLink href="/kakao">Link</CNavLink>
             </CNavItem>
             <CDropdown variant="nav-item" autoClose='outside'>
               <CDropdownToggle color="secondary">Menu</CDropdownToggle>
@@ -80,7 +80,7 @@ const Header = () => {
         </div>
       </div>
       <CModal visible={loginModal} onClose={() => setLoginModal(false)}>
-        <CModalHeader onClose={() => setLoginModal(false)}>
+        <CModalHeader onClose={() => setLoginModal(!loginModal)}>
           <CModalTitle>Login</CModalTitle>
         </CModalHeader>
         <CModalBody>Woohoo, youre reading this text in a modal!</CModalBody>

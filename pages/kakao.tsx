@@ -7,8 +7,6 @@ import {
   CCardTitle,
   CCol,
   CContainer,
-  CListGroup,
-  CListGroupItem,
   CRow
 } from '@coreui/react'
 
@@ -32,7 +30,7 @@ const Kakao = () => {
               className='overflow-hidden'
               style={{maxHeight:'40px',minHeight:'40px', textOverflow:'ellipsis', whiteSpace:'nowrap'}}
             >Kakao Map</CCardTitle>
-            <CButton href={'/kakao/KakaoMap'}>자세히 보기</CButton>
+            <CButton href={'/kakao/KakaoMap'}>read more</CButton>
           </CCardBody>
         </CCard>
       </CCol>
@@ -44,7 +42,7 @@ const Kakao = () => {
               className='overflow-hidden'
               style={{maxHeight:'40px',minHeight:'40px', textOverflow:'ellipsis', whiteSpace:'nowrap'}}
             >Kakao Book</CCardTitle>
-            <CButton href={'/kakao/KakaoBook'}>자세히 보기</CButton>
+            <CButton href={'/kakao/KakaoBook'}>read more</CButton>
           </CCardBody>
         </CCard>
       </CCol>

@@ -15,7 +15,7 @@ type InputAtt = {
 const SearchTextInput = (props : InputAtt) => {
   const {id, value, placeHolder,size, label, onChange, onClick,onKeyPress} = props;
   return (
-      <CForm className="row g-3 justify-content-end">
+      <CForm className="row g-3 justify-content-end pb-2 pt-2">
         <CCol xs={size}>
           <CFormLabel className="visually-hidden">
             {label}

@@ -7,7 +7,7 @@ type Children = {
 
 const Layout = ({children} : Children) => {
   return (
-    <CContainer sm>
+    <CContainer sm className='min-vh-100 d-flex flex-column'>
       {children}
     </CContainer>
   );
