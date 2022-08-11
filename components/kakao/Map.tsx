@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Map, MapMarker, MapTypeControl, ZoomControl} from "react-kakao-maps-sdk"
+import {Map, MapMarker, MapTypeControl, Roadview, ZoomControl} from "react-kakao-maps-sdk"
 import {CToast, CToastBody, CToastHeader} from '@coreui/react'
 /*global kakao*/
 
@@ -28,6 +28,18 @@ const Maps = () => {
   }, []);
   return (
         <>
+          <Roadview // 로드뷰를 표시할 Container
+          position={{
+            // 지도의 중심좌표
+            ...position,
+            radius: 50,
+          }}
+          style={{
+            // 지도의 크기
+            width: "100%",
+            height: "450px",
+          }}
+        />
           <Map
             center={{ lat: 33.5563, lng: 126.79581 }}
             isPanto={true}
@@ -50,7 +62,7 @@ const Maps = () => {
             )}
           </Map>
           {mapsInfo.map((v : any,i : any) =>
-              <CToast autohide={false} visible={true} key={i}>
+              <CToast delay={4000}  visible={true} key={i}>
                 <CToastHeader closeButton>
                   <svg
                     className="rounded me-2"
