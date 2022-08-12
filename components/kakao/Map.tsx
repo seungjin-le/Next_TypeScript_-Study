@@ -1,13 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {Map, MapMarker, MapTypeControl, Roadview, ZoomControl} from "react-kakao-maps-sdk"
 import {CToast, CToastBody, CToastHeader} from '@coreui/react'
+
 /*global kakao*/
 
 const Maps = () => {
   const [loding, setLoding] = useState(false);
-  const [mapsLevel, setMapsLevel] = useState(3);
   const [mapsInfo, setMapsInfo] : Array<object>= useState([]);
-  const mapRef = useRef();
   const [position, setPosition] = useState()
   const handlePostitionClick = (_t : any, {latLng} : any) => {
     console.log(position)
@@ -44,7 +43,7 @@ const Maps = () => {
             center={{ lat: 33.5563, lng: 126.79581 }}
             isPanto={true}
             style={{ width: "100%", height: "360px" }}
-            level={mapsLevel}
+            level={3}
             onClick={(_t, mouseEvent) => {
               handlePostitionClick(_t, mouseEvent)
             }}
@@ -56,12 +55,12 @@ const Maps = () => {
               </>
             }
             {mapsInfo.map((v : any,i : any) =>
-              <MapMarker position={v}>
+              <MapMarker position={v} key={i}>
                 <div style={{ color: "#000" }}>Hello World!</div>
               </MapMarker>
             )}
           </Map>
-          {mapsInfo.map((v : any,i : any) =>
+          {mapsInfo.map((v : any,i : number) =>
               <CToast delay={4000}  visible={true} key={i}>
                 <CToastHeader closeButton>
                   <svg
