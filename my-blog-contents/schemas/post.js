@@ -7,6 +7,7 @@ export default {
       name: 'title',
       title: 'Title',
       type: 'string',
+      validation:(Rule) => Rule.required()
     },
     {
       name: 'slug',
@@ -18,35 +19,58 @@ export default {
       },
     },
     {
+      name: 'subTitle',
+      title: 'sub Title',
+      type: 'string',
+      validation:(Rule) => Rule.required()
+    },
+    {
       name: 'author',
       title: 'Author',
       type: 'reference',
       to: {type: 'author'},
+      validation:(Rule) => Rule.required()
     },
     {
-      name: 'mainImage',
-      title: 'Main image',
+      name: 'content',
+      title: 'Content',
+      type: 'blockContent',
+      validation:(Rule) => Rule.required()
+    },
+    {
+      name: 'createdAt',
+      title: 'Created at',
+      type: 'datetime',
+      validation:(Rule) => Rule.required()
+    },
+    {
+      name: 'thumbnail',
+      title: 'Thumbnail',
       type: 'image',
       options: {
         hotspot: true,
+        validation:(Rule) => Rule.required()
       },
+      fields:[
+        {
+        name: 'alt',
+        type: 'string',
+        title: 'alt',
+        options:{
+          isHighlighted:true,
+        }
+        }
+      ],
+      validation:(Rule) => Rule.required(),
     },
     {
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{type: 'reference', to: {type: 'category'}}],
+      name: 'tag',
+      title: 'Tag',
+      type: 'reference',
+      to:{type: 'tag'},
+      validation:(Rule) => Rule.required(),
     },
-    {
-      name: 'publishedAt',
-      title: 'Published at',
-      type: 'datetime',
-    },
-    {
-      name: 'body',
-      title: 'Body',
-      type: 'blockContent',
-    },
+
   ],
 
   preview: {
